@@ -1,5 +1,9 @@
 import 'package:dadaborkahouse/cart_screen.dart';
 import 'package:dadaborkahouse/categories_screen.dart';
+import 'package:dadaborkahouse/discount_screen.dart';
+import 'package:dadaborkahouse/edit_profile.dart';
+import 'package:dadaborkahouse/home_screen.dart';
+import 'package:dadaborkahouse/product_details.dart';
 import 'package:dadaborkahouse/profile.dart';
 import 'package:dadaborkahouse/signIn_screen.dart';
 import 'package:dadaborkahouse/signUp_screen.dart';
@@ -15,7 +19,11 @@ void main(){
       // home: SignUpScreen(),
       // home: Profile(),
       // home: CategoriesScreen(),
-      home: CartScreen(),
+      // home: CartScreen(),
+      // home: EditProfile(),
+      // home: ProductDetails(),
+      // home: DiscountScreen(),
+      home: HomeScreen(),
     )
   );
 }

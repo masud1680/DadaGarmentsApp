@@ -19,7 +19,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     Image(image: AssetImage("assets/search_icon.png")),
     Image(image: AssetImage("assets/cart_icon.png")),
     Image(image: AssetImage("assets/whitelist_icon.png")),
-
   ];
 
   // // State variable to hold the selected index
@@ -36,8 +35,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   //   Icon(Icons.favorite, size: 30, color: Colors.white),
   //   Icon(Icons.person, size: 30, color: Colors.white),
   // ];
-
-
 
   // This is the background color of your page
   final Color _pageBackgroundColor = Colors.transparent;
@@ -120,30 +117,36 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         width: double.infinity,
         child: Column(
           children: [
-            SizedBox(height: 10,),
+            SizedBox(height: 10),
             //Search box
             Row(
               children: [
                 //input search box
                 Expanded(
                   child: TextField(
+
                     decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 2),
                       filled: true,
                       fillColor: Color(0xFFF5F5F5),
                       prefixIcon: Padding(
                         padding: const EdgeInsets.only(left: 15),
-                        child: Icon(Icons.search,color: Color(0xFFB3B3B3),size: 30,),
+                        child: Icon(
+                          Icons.search,
+                          color: Color(0xFFB3B3B3),
+                          size: 30,
+                        ),
                       ),
                       hintText: "Search Products",
                       hintStyle: TextStyle(color: Color(0xFFB3B3B3)),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Color(0xFFF5F5F5))
+                        borderSide: BorderSide.none,
                       ),
-                      
+
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: Colors.blue),
+                        borderSide: BorderSide.none,
                       ),
                     ),
                   ),
@@ -153,76 +156,73 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   decoration: BoxDecoration(
                     color: Color(0xFFF4A758),
-                    borderRadius: BorderRadius.circular(10)
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   height: 50,
                   width: 50,
-                  child: Image(image: AssetImage("assets/search_ditels_icon.png")),
-                )
+                  child: Image(
+                    image: AssetImage("assets/search_ditels_icon.png"),
+                  ),
+                ),
               ],
             ),
-SizedBox(height: 20,),
+            SizedBox(height: 20),
             //Category Card
             Expanded(
               child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 15,
-                      childAspectRatio: 1.8
-                  ),
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFEFAF5),
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xFFE4E4E7),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                          )
-                        ],
-
-                      ),
-                      height: 100,
-                      width: 150,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10,top: 5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Embroidery Abaya",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600
-                              ),
-                            ),
-                            Text(
-                              "380 Items",
-                              style: TextStyle(
-                                  color: Color(0xFF9F9FA9),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500
-                              ),
-                            ),
-                          ],
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  childAspectRatio: 1.8,
+                ),
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFEFAF5),
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFFE4E4E7),
+                          spreadRadius: 1,
+                          blurRadius: 1,
                         ),
+                      ],
+                    ),
+                    height: 100,
+                    width: 150,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Embroidery Abaya",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "380 Items",
+                            style: TextStyle(
+                              color: Color(0xFF9F9FA9),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  },),
-            )
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
-
-
-
-
-
       ),
 
       // bottom Navigation Bar
@@ -264,10 +264,8 @@ SizedBox(height: 20,),
       //   //other params
       // ),
 
-
       // 2. This is your CurvedNavigationBar
       bottomNavigationBar: CurvedNavigationBar(
-
         // Add your 5 icons to the 'items' list
         items: _navIconList,
 
@@ -289,7 +287,6 @@ SizedBox(height: 20,),
           });
         },
       ),
-
     );
   }
 }

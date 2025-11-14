@@ -8,8 +8,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +49,7 @@ class _CartScreenState extends State<CartScreen> {
         child: Column(
           spacing: 20,
           children: [
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             // Product carts
             Column(
               spacing: 10,
@@ -60,14 +58,14 @@ class _CartScreenState extends State<CartScreen> {
                 Container(
                   decoration: BoxDecoration(
                     color: Color(0xFFF8F2ED),
-                    boxShadow:[
+                    boxShadow: [
                       BoxShadow(
                         color: Color(0xFFE5E5E5),
                         spreadRadius: 1,
                         blurRadius: 1,
-                      )
+                      ),
                     ],
-                    borderRadius: BorderRadius.circular(10)
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   height: 100,
                   width: double.infinity,
@@ -81,11 +79,12 @@ class _CartScreenState extends State<CartScreen> {
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage("assets/cart_product_image02.png"),
-                              fit: BoxFit.fill
+                              image: AssetImage(
+                                "assets/cart_product_image02.png",
+                              ),
+                              fit: BoxFit.fill,
                             ),
-                            borderRadius:BorderRadius.circular(10),
-
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           height: 90,
                           width: 90,
@@ -97,142 +96,6 @@ class _CartScreenState extends State<CartScreen> {
                         flex: 10,
                         child: Container(
                           // margin: EdgeInsets.only(left: 5, top: 5, bottom: 5),
-
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            spacing: 8,
-                            children: [
-                              Text(
-                                "Party Borkha Abaya...",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Text(
-                                "Size: 35",
-                                style: TextStyle(
-                                  color: Color(0xFFB3B3B3),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 10,
-                                ),
-                              ),
-                              // price
-                              Row(
-                                spacing: 7,
-                                children: [
-                                  Text(
-                                    "BDT 2880",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                  Text(
-                                    "BDT 3200",
-                                    style: TextStyle(
-                                        color: Color(0xFFB3B3B3),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 10,
-                                      decoration: TextDecoration.lineThrough,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      // items count increament & decriment button
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFFBE9D7),
-                            borderRadius: BorderRadius.circular(20),
-
-                          ),
-                          width: 30,
-                          height: double.infinity,
-                          
-                          
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: Color(0xFFF4A758),
-                                  radius: 12,
-                                  child: Icon(Icons.add,color: Colors.black,),
-                                ),
-                                Text(
-                                  "2",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                                CircleAvatar(
-                                  backgroundColor: Color(0xFFF4A758),
-                                  radius: 12,
-                                  child: Icon(Icons.remove, color: Colors.black,),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                //card 02
-                Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xFFF8F2ED),
-                      boxShadow:[
-                        BoxShadow(
-                          color: Color(0xFFE5E5E5),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  height: 100,
-                  width: double.infinity,
-                  // single card details
-                  child: Row(
-                    children: [
-                      // card image
-                      Expanded(
-                        flex: 6,
-                        child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/cart_product_image01.png"),
-                                fit: BoxFit.fill
-                            ),
-                            borderRadius:BorderRadius.circular(10),
-
-                          ),
-                          height: 90,
-                          width: 90,
-                        ),
-                      ),
-
-                      // card product details
-                      Expanded(
-                        flex: 10,
-                        child: Container(
-                          // margin: EdgeInsets.only(left: 5, top: 5, bottom: 5),
-
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -276,7 +139,7 @@ class _CartScreenState extends State<CartScreen> {
                                     ),
                                   ),
                                 ],
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -285,15 +148,16 @@ class _CartScreenState extends State<CartScreen> {
                       Expanded(
                         flex: 2,
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 5,
+                          ),
                           decoration: BoxDecoration(
                             color: Color(0xFFFBE9D7),
                             borderRadius: BorderRadius.circular(20),
-
                           ),
                           width: 30,
                           height: double.infinity,
-
 
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5),
@@ -303,7 +167,7 @@ class _CartScreenState extends State<CartScreen> {
                                 CircleAvatar(
                                   backgroundColor: Color(0xFFF4A758),
                                   radius: 12,
-                                  child: Icon(Icons.add,color: Colors.black,),
+                                  child: Icon(Icons.add, color: Colors.black),
                                 ),
                                 Text(
                                   "2",
@@ -316,13 +180,155 @@ class _CartScreenState extends State<CartScreen> {
                                 CircleAvatar(
                                   backgroundColor: Color(0xFFF4A758),
                                   radius: 12,
-                                  child: Icon(Icons.remove, color: Colors.black,),
+                                  child: Icon(
+                                    Icons.remove,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                      )
+                      ),
+                    ],
+                  ),
+                ),
+                //card 02
+                Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF8F2ED),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xFFE5E5E5),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  height: 100,
+                  width: double.infinity,
+                  // single card details
+                  child: Row(
+                    children: [
+                      // card image
+                      Expanded(
+                        flex: 6,
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                "assets/cart_product_image01.png",
+                              ),
+                              fit: BoxFit.fill,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          height: 90,
+                          width: 90,
+                        ),
+                      ),
+
+                      // card product details
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          // margin: EdgeInsets.only(left: 5, top: 5, bottom: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            spacing: 8,
+                            children: [
+                              Text(
+                                "Party Borkha Abaya...",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              Text(
+                                "Size: 35",
+                                style: TextStyle(
+                                  color: Color(0xFFB3B3B3),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10,
+                                ),
+                              ),
+                              // price
+                              Row(
+                                spacing: 7,
+                                children: [
+                                  Text(
+                                    "BDT 2880",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  Text(
+                                    "BDT 3200",
+                                    style: TextStyle(
+                                      color: Color(0xFFB3B3B3),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // items count increament & decriment button
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFBE9D7),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          width: 30,
+                          height: double.infinity,
+
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CircleAvatar(
+                                  backgroundColor: Color(0xFFF4A758),
+                                  radius: 12,
+                                  child: Icon(Icons.add, color: Colors.black),
+                                ),
+                                Text(
+                                  "2",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                                CircleAvatar(
+                                  backgroundColor: Color(0xFFF4A758),
+                                  radius: 12,
+                                  child: Icon(
+                                    Icons.remove,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -340,9 +346,9 @@ class _CartScreenState extends State<CartScreen> {
                     BoxShadow(
                       color: Color(0xFFE5E5E5),
                       spreadRadius: 1,
-                      blurRadius: 1
-                    )
-                  ]
+                      blurRadius: 1,
+                    ),
+                  ],
                 ),
                 width: double.infinity,
                 height: 220,
@@ -425,9 +431,7 @@ class _CartScreenState extends State<CartScreen> {
                       ],
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xFFD4D4D8),
-                      ),
+                      decoration: BoxDecoration(color: Color(0xFFD4D4D8)),
                       height: 1,
                       width: double.infinity,
                     ),
@@ -453,7 +457,6 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),
@@ -493,9 +496,6 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
       ),
-
-
-
     );
   }
 }
