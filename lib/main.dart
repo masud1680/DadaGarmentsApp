@@ -1,3 +1,4 @@
+import 'package:dadaborkahouse/cart_screen.dart';
 import 'package:dadaborkahouse/categories_screen.dart';
 import 'package:dadaborkahouse/profile.dart';
 import 'package:dadaborkahouse/signIn_screen.dart';
@@ -13,7 +14,8 @@ void main(){
       // home: SignInScreen(),
       // home: SignUpScreen(),
       // home: Profile(),
-      home: CategoriesScreen(),
+      // home: CategoriesScreen(),
+      home: CartScreen(),
     )
   );
 }
