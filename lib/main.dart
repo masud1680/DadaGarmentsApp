@@ -9,6 +9,7 @@ import 'package:dadaborkahouse/profile.dart';
 import 'package:dadaborkahouse/signIn_screen.dart';
 import 'package:dadaborkahouse/signUp_screen.dart';
 import 'package:dadaborkahouse/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main(){
@@ -26,6 +27,7 @@ void main(){
       // home: DiscountScreen(),
       // home: HomeScreen(),
       // home: NavSwitchScreen(),
+
     )
   );
 }
