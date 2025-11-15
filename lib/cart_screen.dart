@@ -56,7 +56,7 @@ class _CartScreenState extends State<CartScreen> {
 
              child: ListView.builder(
 
-               padding: EdgeInsets.only(bottom: 5),
+
                scrollDirection: Axis.vertical,
                shrinkWrap: true,
                itemCount: 5,
@@ -64,6 +64,7 @@ class _CartScreenState extends State<CartScreen> {
 
                  //single cards
                  return Container(
+                   margin: EdgeInsets.only(bottom: 10),
                    decoration: BoxDecoration(
                      color: Color(0xFFF8F2ED),
                      boxShadow: [
