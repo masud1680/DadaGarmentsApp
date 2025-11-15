@@ -10,16 +10,7 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  // State variable to hold the selected index
-  int _pageIndex = 1;
 
-  final _navIconList = <Widget>[
-    Image(image: AssetImage("assets/home_icon.png")),
-    Image(image: AssetImage("assets/category_icon.png")),
-    Image(image: AssetImage("assets/search_icon.png")),
-    Image(image: AssetImage("assets/cart_icon.png")),
-    Image(image: AssetImage("assets/whitelist_icon.png")),
-  ];
 
   // // State variable to hold the selected index
   // int _pageIndex = 0;
@@ -36,8 +27,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   //   Icon(Icons.person, size: 30, color: Colors.white),
   // ];
 
-  // This is the background color of your page
-  final Color _pageBackgroundColor = Colors.transparent;
+  // // This is the background color of your page
+  // final Color _pageBackgroundColor = Colors.transparent;
 
   // This is where you define your 5 icons
   // final _navBarItems = <Widget>[
@@ -117,7 +108,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         width: double.infinity,
         child: Column(
           children: [
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             //Search box
             Row(
               children: [
@@ -264,29 +255,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       //   //other params
       // ),
 
-      // 2. This is your CurvedNavigationBar
-      bottomNavigationBar: CurvedNavigationBar(
-        // Add your 5 icons to the 'items' list
-        items: _navIconList,
 
-        // This is the background color of the PAGE
-        backgroundColor: _pageBackgroundColor,
-
-        // This is the background color of the NAVIGATION BAR itself
-        color: Color(0xFFFCE9D8),
-        buttonBackgroundColor: Color(0xFFFCE9D8),
-
-        // Optional: Set animation curve and duration
-        animationDuration: Duration(milliseconds: 300),
-
-        // 3. This is how you handle the tap
-        onTap: (index) {
-          // The 'index' will be 0, 1, 2, 3, or 4
-          setState(() {
-            _pageIndex = index;
-          });
-        },
-      ),
     );
   }
 }

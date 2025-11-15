@@ -101,11 +101,11 @@ class _EditProfileState extends State<EditProfile> {
                         decoration: InputDecoration(
                           hintText: "Your name",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                          border: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: Color(0xFFCCCCCC),
-                              width: 4,
+                              width: 2,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -134,7 +134,9 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       IntlPhoneField(
                         decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
+
+
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: Color(0xFFCCCCCC),
@@ -142,13 +144,13 @@ class _EditProfileState extends State<EditProfile> {
                             ),
                           ),
 
-                          border: OutlineInputBorder(
+                          focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: Color(0xFFCCCCCC),
-                              width: 4,
+                              width: 2,
                             ),
-                          ),
+                          ),// when type focused border not working
                         ),
                         initialCountryCode: 'BD',
                         onChanged: (phone) {
@@ -181,13 +183,13 @@ class _EditProfileState extends State<EditProfile> {
                         textFieldDecoration: InputDecoration(
                           hintText: "Uttara",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                              color: Color(0xFFCCCCCC),
-                              width: 4,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Color(0xFFCCCCCC),
+                                width: 2,
+                              ),
                             ),
-                          ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
@@ -251,11 +253,11 @@ class _EditProfileState extends State<EditProfile> {
                         textFieldDecoration: InputDecoration(
                           hintText: "Uttara",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                          border: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: Color(0xFFCCCCCC),
-                              width: 4,
+                              width: 2,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -317,11 +319,11 @@ class _EditProfileState extends State<EditProfile> {
                         decoration: InputDecoration(
                           hintText: "Uttara",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                          border: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: Color(0xFFCCCCCC),
-                              width: 4,
+                              width: 2,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -337,7 +339,7 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ],
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 60),
               // save changes buttons
               InkWell(
                 onTap: () {

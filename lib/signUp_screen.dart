@@ -1,3 +1,4 @@
+import 'package:dadaborkahouse/signIn_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -53,7 +54,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: InkWell(
                       splashColor: Colors.transparent,
                       onTap: () {
-                        print("Sign In Screen clicked...");
+                        // print("Sign In Screen clicked...");
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));
                       },
                       child: Column(
                         spacing: 5,
@@ -87,7 +89,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: InkWell(
                       splashColor: Colors.transparent,
                       onTap: () {
-                        print("Sign Up Screen clicked...");
+                        // print("Sign Up Screen clicked...");
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
                       },
                       child: Column(
                         spacing: 5,
@@ -164,11 +167,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         decoration: InputDecoration(
                           hintText: "Enter your name",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                          border: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: Color(0xFFCCCCCC),
-                              width: 4,
+                              width: 2,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -196,15 +199,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       TextField(
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: "Enter your phone number",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                          border: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: Color(0xFFCCCCCC),
-                              width: 4,
+                              width: 2,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -233,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       TextField(
                         obscureText: passwordVisible,
-                        keyboardType: TextInputType.number,
+
                         decoration: InputDecoration(
                           suffixIcon: InkWell(
                             splashColor: Colors.transparent,
@@ -247,7 +250,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           hintText: "****************",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                          border: OutlineInputBorder(
+                          enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
                               color: Color(0xFFCCCCCC),
@@ -430,7 +433,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             InkWell(
                               splashColor: Colors.transparent,
                               onTap: () {
-                                print("login here... clicked");
+                                // print("login here... clicked");
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));
                               },
                               child: Text(
                                 "Login",

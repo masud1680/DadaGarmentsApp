@@ -1,3 +1,5 @@
+import 'package:dadaborkahouse/edit_profile.dart';
+import 'package:dadaborkahouse/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -25,49 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> imageSliders = imgList
       .map(
         (item) => Container(
-          child: Container(
-            margin: EdgeInsets.all(0.0),
+          margin: EdgeInsets.all(0.0),
 
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              child: Stack(
-                children: <Widget>[
-                  Image.network(
-                    item,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  ),
-                  // Positioned(
-                  //   bottom: 0.0,
-                  //   left: 0.0,
-                  //   right: 0.0,
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //       gradient: LinearGradient(
-                  //         colors: [
-                  //           Color.fromARGB(200, 0, 0, 0),
-                  //           Color.fromARGB(0, 0, 0, 0),
-                  //         ],
-                  //         begin: Alignment.bottomCenter,
-                  //         end: Alignment.topCenter,
-                  //       ),
-                  //     ),
-                  //     padding: EdgeInsets.symmetric(
-                  //       vertical: 10.0,
-                  //       horizontal: 20.0,
-                  //     ),
-                  //     child: Text(
-                  //       'No. ${imgList.indexOf(item)} image',
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //         fontSize: 20.0,
-                  //         fontWeight: FontWeight.bold,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                ],
-              ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            child: Image.network(
+              item,
+              fit: BoxFit.cover,
+              width: double.infinity,
             ),
           ),
         ),
@@ -94,7 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18),
-            child: Image(image: AssetImage("assets/person_icon.png")),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(),));
+              },
+                child: Image(image: AssetImage("assets/person_icon.png"))
+            ),
           ),
         ],
         bottom: PreferredSize(

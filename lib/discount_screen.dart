@@ -47,7 +47,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
         width: double.infinity,
         child: Column(
           children: [
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             //Search box
             Row(
               children: [

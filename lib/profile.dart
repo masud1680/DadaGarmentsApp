@@ -1,3 +1,4 @@
+import 'package:dadaborkahouse/edit_profile.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -91,35 +92,40 @@ class _ProfileState extends State<Profile> {
                   spacing: 12,
                   children: [
                     SizedBox(height: 10,),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFEFAF6),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color(0xFFFAFAFA),
-                                spreadRadius: 1,
-                                blurRadius: 1
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      height: 60,
-                      width: double.infinity,
-                      child: ListTile(
-                        leading: Image(
-                            image: AssetImage("assets/profile_icon.png"),
-
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfile(),));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFEFAF6),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color(0xFFFAFAFA),
+                                  spreadRadius: 1,
+                                  blurRadius: 1
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(10)
                         ),
-                        title: Text(
-                          "My Profile",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
+                        height: 60,
+                        width: double.infinity,
+                        child: ListTile(
+                          leading: Image(
+                              image: AssetImage("assets/profile_icon.png"),
+                      
                           ),
+                          title: Text(
+                            "Edit Profile",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                            ),
+                          ),
+                          trailing: Icon(Icons.navigate_next_rounded,color: Colors.grey,),
                         ),
-                        trailing: Icon(Icons.navigate_next_rounded,color: Colors.grey,),
                       ),
                     ),
                     Container(

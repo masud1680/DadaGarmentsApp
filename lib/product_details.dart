@@ -1,3 +1,4 @@
+import 'package:dadaborkahouse/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:readmore/readmore.dart';
@@ -42,9 +43,15 @@ class _ProductDetailsState extends State<ProductDetails> {
             padding: const EdgeInsets.only(right: 18),
             child: Stack(
               children: [
-                CircleAvatar(
-                  backgroundColor: Color(0xFFF5F5F5),
-                  child: Image(image: AssetImage("assets/cart_icon.png")),
+                InkWell(
+                  focusColor: Colors.transparent ,
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: Color(0xFFF5F5F5),
+                    child: Image(image: AssetImage("assets/cart_icon.png")),
+                  ),
                 ),
                 Positioned(
                   top: 6,
