@@ -39,15 +39,21 @@ class _EditProfileState extends State<EditProfile> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: CircleAvatar(
-            backgroundColor: Color(0xFFF6F6F6),
-            radius: 2,
-            child: Image(
-              image: AssetImage("assets/mask_group.png"),
-              width: 20,
-              height: 20,
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CircleAvatar(
+              backgroundColor: Color(0xFFF6F6F6),
+              radius: 2,
+              child: Image(
+                image: AssetImage("assets/mask_group.png"),
+                width: 20,
+                height: 20,
+              ),
             ),
           ),
         ),

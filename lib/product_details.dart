@@ -19,13 +19,18 @@ class _ProductDetailsState extends State<ProductDetails> {
         backgroundColor: Colors.white,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: CircleAvatar(
-            backgroundColor: Color(0xFFF6F6F6),
-            radius: 2,
-            child: Image(
-              image: AssetImage("assets/mask_group.png"),
-              width: 20,
-              height: 20,
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CircleAvatar(
+              backgroundColor: Color(0xFFF6F6F6),
+              radius: 2,
+              child: Image(
+                image: AssetImage("assets/mask_group.png"),
+                width: 20,
+                height: 20,
+              ),
             ),
           ),
         ),
@@ -41,36 +46,36 @@ class _ProductDetailsState extends State<ProductDetails> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18),
-            child: Stack(
-              children: [
-                InkWell(
-                  focusColor: Colors.transparent ,
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
-                  },
-                  child: CircleAvatar(
+            child: InkWell(
+              focusColor: Colors.transparent ,
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+              },
+              child: Stack(
+                children: [
+                  CircleAvatar(
                     backgroundColor: Color(0xFFF5F5F5),
                     child: Image(image: AssetImage("assets/cart_icon.png")),
                   ),
-                ),
-                Positioned(
-                  top: 6,
-                  right: 3,
-                  child: CircleAvatar(
-                    radius: 8,
-                    backgroundColor: Color(0xFFF4A758),
-                    child: Center(
-                      child: Text(
-                        "2",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
+                  Positioned(
+                    top: 6,
+                    right: 3,
+                    child: CircleAvatar(
+                      radius: 8,
+                      backgroundColor: Color(0xFFF4A758),
+                      child: Center(
+                        child: Text(
+                          "2",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

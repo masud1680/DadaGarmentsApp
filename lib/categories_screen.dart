@@ -1,3 +1,4 @@
+import 'package:dadaborkahouse/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
@@ -69,30 +70,36 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18),
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Color(0xFFF5F5F5),
-                  child: Image(image: AssetImage("assets/cart_icon.png")),
-                ),
-                Positioned(
-                  top: 6,
-                  right: 3,
-                  child: CircleAvatar(
-                    radius: 8,
-                    backgroundColor: Color(0xFFF4A758),
-                    child: Center(
-                      child: Text(
-                        "2",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
+            child: InkWell(
+              focusColor: Colors.transparent ,
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+              },
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Color(0xFFF5F5F5),
+                    child: Image(image: AssetImage("assets/cart_icon.png")),
+                  ),
+                  Positioned(
+                    top: 6,
+                    right: 3,
+                    child: CircleAvatar(
+                      radius: 8,
+                      backgroundColor: Color(0xFFF4A758),
+                      child: Center(
+                        child: Text(
+                          "2",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

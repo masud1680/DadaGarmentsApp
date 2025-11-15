@@ -1,4 +1,5 @@
 import 'package:dadaborkahouse/edit_profile.dart';
+import 'package:dadaborkahouse/signIn_screen.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -17,13 +18,18 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.white,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: CircleAvatar(
-            backgroundColor: Color(0xFFF6F6F6),
-            radius: 2,
-            child: Image(
-                image: AssetImage("assets/mask_group.png"),
-              width: 20,
-              height: 20,
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: CircleAvatar(
+              backgroundColor: Color(0xFFF6F6F6),
+              radius: 2,
+              child: Image(
+                  image: AssetImage("assets/mask_group.png"),
+                width: 20,
+                height: 20,
+              ),
             ),
           ),
         ),
@@ -221,35 +227,42 @@ class _ProfileState extends State<Profile> {
                         trailing: Icon(Icons.navigate_next_rounded,color: Colors.grey,),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFEFAF6),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color(0xFFFAFAFA),
-                                spreadRadius: 1,
-                                blurRadius: 1
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      height: 60,
-                      width: double.infinity,
-                      child: ListTile(
-                        leading: Image(
-                          image: AssetImage("assets/logout_icon.png"),
 
+                    InkWell(
+                      focusColor: Colors.transparent ,
+                      onTap: () {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFEFAF6),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color(0xFFFAFAFA),
+                                  spreadRadius: 1,
+                                  blurRadius: 1
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(10)
                         ),
-                        title: Text(
-                          "Logout",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
+                        height: 60,
+                        width: double.infinity,
+                        child: ListTile(
+                          leading: Image(
+                            image: AssetImage("assets/logout_icon.png"),
+
                           ),
-                        ),
+                          title: Text(
+                            "Logout",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                            ),
+                          ),
 
+                        ),
                       ),
                     ),
                     SizedBox(height: 10,),
