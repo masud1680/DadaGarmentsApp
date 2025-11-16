@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+App Download Link: https://github.com/masud1680/DataGarmentsApp/releases
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

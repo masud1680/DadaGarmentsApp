@@ -21,31 +21,6 @@ class _NavSwitchScreenState extends State<NavSwitchScreen> {
   // State variable to hold the selected index
   int pageIndex = 0;
 
-
-
-  // final _navIconList = <Widget>[
-  //   Padding(
-  //     padding: const EdgeInsets.all(5.0),
-  //     child: Image(image: AssetImage("assets/home_icon.png")),
-  //   ),
-  //   Padding(
-  //     padding: const EdgeInsets.all(5.0),
-  //     child: Image(image: AssetImage("assets/category_icon.png")),
-  //   ),
-  //   Padding(
-  //     padding: const EdgeInsets.all(5.0),
-  //     child: Image(image: AssetImage("assets/search_icon.png")),
-  //   ),
-  //   Padding(
-  //     padding: const EdgeInsets.all(5.0),
-  //     child: Image(image: AssetImage("assets/cart_icon.png")),
-  //   ),
-  //   Padding(
-  //     padding: const EdgeInsets.all(5.0),
-  //     child: Image(image: AssetImage("assets/whitelist_icon.png")),
-  //   ),
-  // ];
-
   List screen = [HomeScreen(),CategoriesScreen(),DiscountScreen(), CartScreen(), ProductDetails()];
 
   @override
