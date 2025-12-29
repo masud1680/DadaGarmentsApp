@@ -1,7 +1,8 @@
-import 'package:dadaborkahouse/edit_profile.dart';
-import 'package:dadaborkahouse/profile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
+import '../profile/ui.dart';
 
 final List<String> imgList = [
   'https://i.ibb.co.com/KjX0XdPD/image-8.png',
@@ -27,18 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> imageSliders = imgList
       .map(
         (item) => Container(
-          margin: EdgeInsets.all(0.0),
+      margin: EdgeInsets.all(0.0),
 
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            child: Image.network(
-              item,
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
-          ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        child: Image.network(
+          item,
+          fit: BoxFit.cover,
+          width: double.infinity,
         ),
-      )
+      ),
+    ),
+  )
       .toList();
 
   // fast carousel slider start end
@@ -62,9 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 18),
             child: InkWell(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(),));
-              },
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(),));
+                },
                 child: Image(image: AssetImage("assets/person_icon.png"))
             ),
           ),
@@ -173,13 +174,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color:
-                                      (Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.white
-                                              : Color(0xFFF99B2B))
-                                          .withOpacity(
-                                            _current == entry.key ? 0.9 : 0.4,
-                                          ),
+                                  (Theme.of(context).brightness ==
+                                      Brightness.dark
+                                      ? Colors.white
+                                      : Color(0xFFF99B2B))
+                                      .withOpacity(
+                                    _current == entry.key ? 0.9 : 0.4,
+                                  ),
                                 ),
                               ),
                             );
@@ -326,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       padding: const EdgeInsets.only(left: 5),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           //Name
                                           Text(
@@ -478,7 +479,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       padding: const EdgeInsets.only(left: 5),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           //Name
                                           Text(
@@ -668,7 +669,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               //Name
                                               Text(
@@ -690,7 +691,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                      FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -699,7 +700,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xFFB3B3B3),
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                       fontSize: 13,
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -784,7 +785,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               //Name
                                               Text(
@@ -806,7 +807,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                      FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -815,7 +816,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xFFB3B3B3),
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                       fontSize: 13,
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -982,7 +983,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               //Name
                                               Text(
@@ -1004,7 +1005,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                      FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -1013,7 +1014,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xFFB3B3B3),
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                       fontSize: 13,
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -1098,7 +1099,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               //Name
                                               Text(
@@ -1120,7 +1121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                      FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -1129,7 +1130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xFFB3B3B3),
                                                       fontWeight:
-                                                          FontWeight.w400,
+                                                      FontWeight.w400,
                                                       fontSize: 13,
                                                       decoration: TextDecoration
                                                           .lineThrough,

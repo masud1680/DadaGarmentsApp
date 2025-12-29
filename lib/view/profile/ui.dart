@@ -1,6 +1,8 @@
-import 'package:dadaborkahouse/edit_profile.dart';
-import 'package:dadaborkahouse/signIn_screen.dart';
+
 import 'package:flutter/material.dart';
+
+import '../auth/login/ui.dart';
+import '../profile_edit/ui.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -26,7 +28,7 @@ class _ProfileState extends State<Profile> {
               backgroundColor: Color(0xFFF6F6F6),
               radius: 2,
               child: Image(
-                  image: AssetImage("assets/mask_group.png"),
+                image: AssetImage("assets/mask_group.png"),
                 width: 20,
                 height: 20,
               ),
@@ -64,12 +66,12 @@ class _ProfileState extends State<Profile> {
                   children: [
                     // profile pic
                     CircleAvatar(
-                        backgroundImage: AssetImage("assets/profile_pic_def.png"),
+                      backgroundImage: AssetImage("assets/profile_pic_def.png"),
                       radius: 60,
                     ),
                     //profile name
                     Text(
-                        "Md. Masud",
+                      "Md. Masud",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
@@ -82,15 +84,15 @@ class _ProfileState extends State<Profile> {
               //others details container
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xFFD4D4D4),
-                      spreadRadius: 1,
-                      blurRadius: 1
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(10)
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0xFFD4D4D4),
+                          spreadRadius: 1,
+                          blurRadius: 1
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(10)
                 ),
                 height: 400,
                 width: double.infinity,
@@ -119,8 +121,8 @@ class _ProfileState extends State<Profile> {
                         width: double.infinity,
                         child: ListTile(
                           leading: Image(
-                              image: AssetImage("assets/profile_icon.png"),
-                      
+                            image: AssetImage("assets/profile_icon.png"),
+
                           ),
                           title: Text(
                             "Edit Profile",

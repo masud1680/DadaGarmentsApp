@@ -1,16 +1,24 @@
-import 'package:dadaborkahouse/signIn_screen.dart';
-import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+import 'package:dadaborkahouse/controller/auth/login.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import '../../navbar/ui.dart';
+import '../register/ui.dart';
+
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   bool passwordVisible = true;
+  bool isLoading = false;
 
+final TextEditingController number = TextEditingController();
+  final TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              color: Color(0xFFD9D9D9),
+                              color: Color(0xFFF4A758),
                               borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(10),
                                 topLeft: Radius.circular(10),
@@ -105,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              color: Color(0xFFF4A758),
+                              color: Color(0xFFD9D9D9),
                               borderRadius: BorderRadius.only(
                                 bottomRight: Radius.circular(10),
                                 topRight: Radius.circular(10),
@@ -149,42 +157,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Column(
                 spacing: 10,
                 children: [
-                  // name
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 6,
-                    children: [
-                      Text(
-                        "Name",
-                        style: TextStyle(
-                          color: Color(0XFF5B5B5B),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      TextField(
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          hintText: "Enter your name",
-                          hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                              color: Color(0xFFCCCCCC),
-                              width: 2,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(
-                              color: Color(0xFFCCCCCC),
-                              width: 2,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   // phone number
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,6 +171,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       TextField(
+                        controller: number,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: "Enter your phone number",
@@ -235,6 +208,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       TextField(
+                        controller: password,
                         obscureText: passwordVisible,
 
                         decoration: InputDecoration(
@@ -291,166 +265,187 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               SizedBox(height: 30),
               //Login with login google facebook buttons
-              Padding(
-                padding: const EdgeInsets.only(left: 5, right: 5, bottom: 20),
-                child: Column(
-                  spacing: 20,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        print("register clicked...");
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF4A758),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xFFD4D4D4),
-                              blurRadius: 1,
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                        width: double.infinity,
-                        height: 50,
-                        child: Center(
-                          child: Text(
-                            "Register",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                            ),
+              Column(
+                spacing: 20,
+                children: [
+                  InkWell(
+                    onTap: () async {
+isLoading = true;
+setState(() {});
+
+                      var data = {
+                        "phone" : number.text,
+                        "password" : password.text
+                      };
+
+                      bool result = await LoginController().loginAccount(data: data);
+                      if(result == true){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) =>  NavSwitchScreen(),));
+                        isLoading = false;
+                        setState(() {});
+                      }else{
+
+                        Future.delayed(Duration(seconds: 2));
+                        isLoading = false;
+                        setState(() {});
+                        print("=========$data=======");
+
+                        print("Login clicked...");
+                      }
+
+
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF4A758),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFD4D4D4),
+                            blurRadius: 1,
+                            spreadRadius: 1,
                           ),
-                        ),
+                        ],
                       ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(color: Colors.transparent),
                       width: double.infinity,
-                      height: 23,
+                      height: 50,
                       child: Center(
-                        child: Text(
-                          "Or",
+                        child: isLoading ? CircularProgressIndicator(color: Colors.white,) :
+                        Text(
+                          "Login",
                           style: TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w600,
                             fontSize: 18,
                           ),
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        print("Google clicked...");
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFEFAF5),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xFFD4D4D4),
-                              blurRadius: 1,
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                        width: double.infinity,
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          spacing: 10,
-                          children: [
-                            Image(image: AssetImage("assets/google_icon.png")),
-                            Text(
-                              "Sign in with google",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ],
+                  ),
+                  Container(
+                    decoration: BoxDecoration(color: Colors.transparent),
+                    width: double.infinity,
+                    height: 23,
+                    child: Center(
+                      child: Text(
+                        "Or",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18,
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        print("Facebook clicked...");
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFEFAF5),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xFFD4D4D4),
-                              blurRadius: 1,
-                              spreadRadius: 1,
-                            ),
-                          ],
-                        ),
-                        width: double.infinity,
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          spacing: 10,
-                          children: [
-                            Image(image: AssetImage("assets/facebook_icon.png")),
-                            Text(
-                              "Sign in with facebook",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ],
-                        ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      print("Google clicked...");
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFEFAF5),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFD4D4D4),
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                          ),
+                        ],
                       ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(color: Colors.transparent),
                       width: double.infinity,
-                      height: 23,
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          spacing: 3,
-                          children: [
-                            Text(
-                              "Don’t have an account?",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                              ),
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        spacing: 10,
+                        children: [
+                          Image(image: AssetImage("assets/google_icon.png")),
+                          Text(
+                            "Sign in with google",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
                             ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              onTap: () {
-                                // print("login here... clicked");
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));
-                              },
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                  color: Color(0xFFF4A758),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      print("Facebook clicked...");
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFEFAF5),
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFD4D4D4),
+                            blurRadius: 1,
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                      width: double.infinity,
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        spacing: 10,
+                        children: [
+                          Image(image: AssetImage("assets/facebook_icon.png")),
+                          Text(
+                            "Sign in with facebook",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(color: Colors.transparent),
+                    width: double.infinity,
+                    height: 23,
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 3,
+                        children: [
+                          Text(
+                            "Already have an account?",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              // print("register here... clicked");
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
+                            },
+                            child: Text(
+                              "Register here",
+                              style: TextStyle(
+                                color: Color(0xFFF4A758),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

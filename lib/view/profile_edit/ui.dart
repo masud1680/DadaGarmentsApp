@@ -189,13 +189,13 @@ class _EditProfileState extends State<EditProfile> {
                         textFieldDecoration: InputDecoration(
                           hintText: "Uttara",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: Color(0xFFCCCCCC),
-                                width: 2,
-                              ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Color(0xFFCCCCCC),
+                              width: 2,
                             ),
+                          ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(
@@ -219,13 +219,13 @@ class _EditProfileState extends State<EditProfile> {
                               name: 'Dhaka',
                               value: "value2",
                               toolTipMsg:
-                              "DropDownButton is a widget that we can use to select one unique value from a set of values"),
+                              "DropDownButton is a widgets that we can use to select one unique value from a set of values"),
                           DropDownValueModel(name: 'Khulna', value: "value3"),
                           DropDownValueModel(
                               name: 'Barishal',
                               value: "value4",
                               toolTipMsg:
-                              "DropDownButton is a widget that we can use to select one unique value from a set of values"),
+                              "DropDownButton is a widgets that we can use to select one unique value from a set of values"),
                           DropDownValueModel(name: 'Rajshahi', value: "value5"),
                           DropDownValueModel(name: 'Sylhet', value: "value6"),
                           DropDownValueModel(name: 'Chittagong', value: "value7"),
@@ -289,13 +289,13 @@ class _EditProfileState extends State<EditProfile> {
                               name: 'Nilphamari',
                               value: "value2",
                               toolTipMsg:
-                              "DropDownButton is a widget that we can use to select one unique value from a set of values"),
+                              "DropDownButton is a widgets that we can use to select one unique value from a set of values"),
                           DropDownValueModel(name: 'Panchagurh', value: "value3"),
                           DropDownValueModel(
                               name: 'Dinajpur',
                               value: "value4",
                               toolTipMsg:
-                              "DropDownButton is a widget that we can use to select one unique value from a set of values"),
+                              "DropDownButton is a widgets that we can use to select one unique value from a set of values"),
                           DropDownValueModel(name: 'name5', value: "value5"),
                           DropDownValueModel(name: 'name6', value: "value6"),
                           DropDownValueModel(name: 'name7', value: "value7"),

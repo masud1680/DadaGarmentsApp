@@ -170,7 +170,7 @@ class _DiscountScreenState extends State<DiscountScreen> {
                                             fontWeight: FontWeight.w400,
                                             fontSize: 12,
                                             decoration:
-                                                TextDecoration.lineThrough,
+                                            TextDecoration.lineThrough,
                                           ),
                                         ),
                                       ],

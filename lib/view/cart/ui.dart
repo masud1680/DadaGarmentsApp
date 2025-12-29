@@ -174,7 +174,7 @@ class _CartScreenState extends State<CartScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   CircleAvatar(
                                     backgroundColor: Color(0xFFF4A758),

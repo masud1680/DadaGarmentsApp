@@ -1,7 +1,9 @@
-import 'package:dadaborkahouse/cart_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:readmore/readmore.dart';
+
+import '../cart/ui.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -517,8 +519,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English...",
                     style: TextStyle(
                         color: Color(0xFFA1A1A1),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400
                     ),
                     trimMode: TrimMode.Line,
                     trimLines: 4,

@@ -1,6 +1,8 @@
-import 'package:dadaborkahouse/navSwitch_Screen.dart';
-import 'package:dadaborkahouse/signIn_screen.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../auth/login/ui.dart';
+import '../navbar/ui.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,7 +15,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void delay()async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));
+
+    final storage = FlutterSecureStorage();
+    if( await storage.read(key: 'token') != null){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) =>  NavSwitchScreen(),));
+    }else{
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));
+    }
+
   }
 
   @override
@@ -30,8 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/splash_screen.png"),
-                // fit: BoxFit.fill
+              image: AssetImage("assets/splash_screen.png"),
+              // fit: BoxFit.fill
             ),
           ),
 

@@ -1,7 +1,9 @@
-import 'package:dadaborkahouse/cart_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+
+import '../cart/ui.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
