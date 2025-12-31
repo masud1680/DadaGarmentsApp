@@ -88,6 +88,7 @@ flutter:
      - assets/facebook_icon.png
      - assets/google_icon.png
      - assets/profile_pic_def.png
+     - assets/loading_img/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

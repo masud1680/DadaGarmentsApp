@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../auth/login/ui.dart';
 import '../profile_edit/ui.dart';
@@ -233,6 +234,10 @@ class _ProfileState extends State<Profile> {
                     InkWell(
                       focusColor: Colors.transparent ,
                       onTap: () {
+                        final storage = FlutterSecureStorage();
+                        // storage.write(key: 'token', value: null);
+                        storage.deleteAll(); // delete current user all data
+
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));
                       },
                       child: Container(

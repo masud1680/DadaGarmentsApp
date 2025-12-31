@@ -17,7 +17,9 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(Duration(seconds: 2));
 
     final storage = FlutterSecureStorage();
-    if( await storage.read(key: 'token') != null){
+    var token = await storage.read(key: 'token');
+
+    if( token != null){
       Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) =>  NavSwitchScreen(),));
     }else{
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));

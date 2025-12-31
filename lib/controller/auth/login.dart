@@ -15,11 +15,13 @@ class LoginController{
 
 
       if(response.statusCode == 200){
-        EasyLoading.showSuccess("Login Successfully");
 
-        var token = jsonDecode(response.body)['token'];
+
+        var t = jsonDecode(response.body)['token'];
         final storage = FlutterSecureStorage();
-        storage.write(key: token, value: token);
+        storage.write(key: 'token', value: t);
+
+        EasyLoading.showSuccess("Login Successfully");
 
         return true;
       }else if(response.statusCode == 422){

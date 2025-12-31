@@ -1,4 +1,3 @@
-
 import 'package:dadaborkahouse/controller/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -17,7 +16,7 @@ class _SignInScreenState extends State<SignInScreen> {
   bool passwordVisible = true;
   bool isLoading = false;
 
-final TextEditingController number = TextEditingController();
+  final TextEditingController number = TextEditingController();
   final TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,12 @@ final TextEditingController number = TextEditingController();
                       splashColor: Colors.transparent,
                       onTap: () {
                         // print("Sign In Screen clicked...");
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen(),));
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignInScreen(),
+                          ),
+                        );
                       },
                       child: Column(
                         spacing: 5,
@@ -98,7 +102,12 @@ final TextEditingController number = TextEditingController();
                       splashColor: Colors.transparent,
                       onTap: () {
                         // print("Sign Up Screen clicked...");
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpScreen(),
+                          ),
+                        );
                       },
                       child: Column(
                         spacing: 5,
@@ -270,21 +279,27 @@ final TextEditingController number = TextEditingController();
                 children: [
                   InkWell(
                     onTap: () async {
-isLoading = true;
-setState(() {});
+                      isLoading = true;
+                      setState(() {});
 
                       var data = {
-                        "phone" : number.text,
-                        "password" : password.text
+                        "phone": number.text,
+                        "password": password.text,
                       };
 
-                      bool result = await LoginController().loginAccount(data: data);
-                      if(result == true){
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) =>  NavSwitchScreen(),));
+                      bool result = await LoginController().loginAccount(
+                        data: data,
+                      );
+                      if (result == true) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NavSwitchScreen(),
+                          ),
+                        );
                         isLoading = false;
                         setState(() {});
-                      }else{
-
+                      } else {
                         Future.delayed(Duration(seconds: 2));
                         isLoading = false;
                         setState(() {});
@@ -292,8 +307,6 @@ setState(() {});
 
                         print("Login clicked...");
                       }
-
-
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -310,15 +323,16 @@ setState(() {});
                       width: double.infinity,
                       height: 50,
                       child: Center(
-                        child: isLoading ? CircularProgressIndicator(color: Colors.white,) :
-                        Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
+                        child: isLoading
+                            ? CircularProgressIndicator(color: Colors.white)
+                            : Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -430,7 +444,12 @@ setState(() {});
                             splashColor: Colors.transparent,
                             onTap: () {
                               // print("register here... clicked");
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpScreen(),
+                                ),
+                              );
                             },
                             child: Text(
                               "Register here",

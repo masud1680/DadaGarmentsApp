@@ -1,9 +1,13 @@
 
-import 'package:flutter/material.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'dart:developer';
 
+import 'package:dadaborkahouse/view/categories/widget/category_card.dart';
+import 'package:flutter/material.dart';
+
+
+import '../../controller/category.dart';
 import '../cart/ui.dart';
+import '../product/ui.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -14,33 +18,35 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
 
+  bool isLoading = false;
 
-  // // State variable to hold the selected index
-  // int _pageIndex = 0;
-  //
-  // // This is the background color of your page
-  // final Color _pageBackgroundColor = Colors.blueAccent;
-  //
-  // // This is where you define your 5 icons
-  // final _navBarItems = <Widget>[
-  //   Icon(Icons.home, size: 30, color: Colors.white),
-  //   Icon(Icons.search, size: 30, color: Colors.white),
-  //   Icon(Icons.add, size: 30, color: Colors.white), // The middle icon
-  //   Icon(Icons.favorite, size: 30, color: Colors.white),
-  //   Icon(Icons.person, size: 30, color: Colors.white),
-  // ];
+  // fetch data from api
 
-  // // This is the background color of your page
-  // final Color _pageBackgroundColor = Colors.transparent;
 
-  // This is where you define your 5 icons
-  // final _navBarItems = <Widget>[
-  //   Icon(Icons.home, size: 30, color: Color(0xFF757575)),
-  //   Icon(Icons.search, size: 30, color: Color(0xFF757575)),
-  //   Icon(Icons.add, size: 30, color: Color(0xFF757575)), // The middle icon
-  //   Icon(Icons.favorite, size: 30, color: Color(0xFF757575)),
-  //   Icon(Icons.person, size: 30, color: Color(0xFF757575)),
-  // ];
+  List categoriesList = [];
+
+
+  void fetchData() async {
+    isLoading = true;
+    setState(() {});
+
+
+    categoriesList = await CategoryController().fetchCategories();
+
+    // log("========${categoriesList}===========");
+
+    isLoading = false;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchData();
+
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +117,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         ),
       ),
 
-      body: Container(
+      body: isLoading == true ? Center(
+        child: CircularProgressIndicator(),
+      ) : Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
         height: double.infinity,
         width: double.infinity,
@@ -151,7 +159,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     ),
                   ),
                 ),
-
+                // search box
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   decoration: BoxDecoration(
@@ -176,47 +184,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   mainAxisSpacing: 15,
                   childAspectRatio: 1.8,
                 ),
-                itemCount: 4,
+                itemCount: categoriesList.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFEFAF5),
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0xFFE4E4E7),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                        ),
-                      ],
-                    ),
-                    height: 100,
-                    width: 150,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Embroidery Abaya",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            "380 Items",
-                            style: TextStyle(
-                              color: Color(0xFF9F9FA9),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductsScreen(whichPage: categoriesList[index]['name'], catId: categoriesList[index]['id'],),));
+                    },
+                      child: CategoryCards(categoryItem: categoriesList[index],),
                   );
                 },
               ),
@@ -225,46 +199,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         ),
       ),
 
-      // bottom Navigation Bar
-      // bottomNavigationBar: CurvedNavigationBar(
-      //   backgroundColor: Colors.transparent,
-      //   color: Color(0xFFFCE9D8),
-      //   buttonBackgroundColor: Color(0xFFFCE9D8),
-      //   items: <Widget>[
-      //     Icon(Icons.add, size: 30),
-      //     Icon(Icons.list, size: 30),
-      //     Icon(Icons.compare_arrows, size: 30),
-      //
-      //   ],
-      //   onTap: (index) {
-      //     //Handle button tap
-      //     setState(() {
-      //       _bottomNavIndex = index;
-      //     });
-      //   },
-      // ),
 
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     setState(() {
-      //
-      //     });
-      //   },
-      //   //params
-      //   backgroundColor: Colors.red,
-      //
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // bottomNavigationBar: AnimatedBottomNavigationBar(
-      //   icons: NavIocnList,
-      //   activeIndex: _bottomNavIndex,
-      //   gapLocation: GapLocation.center,
-      //   notchSmoothness: NotchSmoothness.softEdge,
-      //   onTap: (index) => setState(() => _bottomNavIndex = index),
-      //   //other params
-      // ),
 
 
     );
   }
 }
+
+

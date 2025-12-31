@@ -23,7 +23,7 @@ class _NavSwitchScreenState extends State<NavSwitchScreen> {
   // State variable to hold the selected index
   int pageIndex = 0;
 
-  List screen = [HomeScreen(),CategoriesScreen(),DiscountScreen(), CartScreen(), ProductDetails()];
+  List screen = [HomeScreen(),CategoriesScreen(),ProductsScreen(whichPage: 'Discount',), CartScreen(), ProductDetails(productId: 1,)];
 
   @override
   Widget build(BuildContext context) {

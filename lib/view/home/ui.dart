@@ -1,17 +1,25 @@
+import 'dart:developer';
 
+import 'package:dadaborkahouse/controller/category.dart';
+import 'package:dadaborkahouse/controller/home.dart';
+import 'package:dadaborkahouse/view/home/widget/categories_card.dart';
+import 'package:dadaborkahouse/view/home/widget/product_showcase_card.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import '../../controller/base_url.dart';
+import '../product/ui.dart';
 import '../profile/ui.dart';
 
-final List<String> imgList = [
-  'https://i.ibb.co.com/KjX0XdPD/image-8.png',
-  'https://i.ibb.co.com/BVKvsQ3C/image-14.png',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-  'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-  'https://photosly.in/wp-content/uploads/2024/08/cute-girl-pic55.jpg',
-];
+// final List<String> imgList = [
+//   'https://i.ibb.co.com/KjX0XdPD/image-8.png',
+//   'https://i.ibb.co.com/BVKvsQ3C/image-14.png',
+//   'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+//   'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+//   'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+//   'https://photosly.in/wp-content/uploads/2024/08/cute-girl-pic55.jpg',
+// ];
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,28 +29,58 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = false;
+
+  // fetch data from api
+  // slider data
+  List sliderImgList = [];
+  List categoriesList = [];
+  Map homeProductsList = {};
+
+  void fetchData() async {
+    isLoading = true;
+    setState(() {});
+
+    sliderImgList = await HomeController().fetchSliders();
+    categoriesList = await CategoryController().fetchCategories();
+    homeProductsList = await HomeController().fetchHomeProducts();
+    // log("========${homeProductsList}===========");
+
+    isLoading = false;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchData();
+
+    super.initState();
+  }
+
   // fast carousel slider start
-  int _current = 0;
-  final CarouselSliderController _controller = CarouselSliderController();
-
-  final List<Widget> imageSliders = imgList
-      .map(
-        (item) => Container(
-      margin: EdgeInsets.all(0.0),
-
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        child: Image.network(
-          item,
-          fit: BoxFit.cover,
-          width: double.infinity,
-        ),
-      ),
-    ),
-  )
-      .toList();
+  // int _current = 0;
+  // final CarouselSliderController _controller = CarouselSliderController();
+  //
+  // late final List<Widget> imageSliders = sliderImgList
+  //     .map(
+  //       (item) => Container(
+  //     margin: EdgeInsets.all(0.0),
+  //
+  //     child: ClipRRect(
+  //       borderRadius: BorderRadius.all(Radius.circular(5.0)),
+  //       child: Image.network(
+  //         item,
+  //         fit: BoxFit.cover,
+  //         width: double.infinity,
+  //       ),
+  //     ),
+  //   ),
+  // )
+  //     .toList();
 
   // fast carousel slider start end
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,10 +101,13 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 18),
             child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(),));
-                },
-                child: Image(image: AssetImage("assets/person_icon.png"))
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                );
+              },
+              child: Image(image: AssetImage("assets/person_icon.png")),
             ),
           ),
         ],
@@ -76,7 +117,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 
-      body: Container(
+      body: isLoading == true ? Center(
+        child: CircularProgressIndicator(),
+      )
+          : Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
         height: double.infinity,
         width: double.infinity,
@@ -140,53 +184,89 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Stack(
                     children: [
+                      // CarouselSlider(
+                      //   items: imageSliders,
+                      //   carouselController: _controller,
+                      //   options: CarouselOptions(
+                      //     viewportFraction: 1,
+                      //     scrollDirection: Axis.horizontal,
+                      //     autoPlay: true,
+                      //     enlargeCenterPage: true,
+                      //     aspectRatio: 2.5,
+                      //     onPageChanged: (index, reason) {
+                      //       setState(() {
+                      //         _current = index;
+                      //       });
+                      //     },
+                      //   ),
+                      // ),
                       CarouselSlider(
-                        items: imageSliders,
-                        carouselController: _controller,
                         options: CarouselOptions(
-                          viewportFraction: 1,
-                          scrollDirection: Axis.horizontal,
+                          height: 150.0,
                           autoPlay: true,
-                          enlargeCenterPage: true,
-                          aspectRatio: 2.5,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              _current = index;
-                            });
-                          },
+                          viewportFraction: .9,
                         ),
-                      ),
-                      Positioned(
-                        bottom: 4,
-                        left: 120,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: imgList.asMap().entries.map((entry) {
-                            return GestureDetector(
-                              onTap: () => _controller.animateToPage(entry.key),
-                              child: Container(
-                                width: 8.0,
-                                height: 8.0,
-                                margin: EdgeInsets.symmetric(
-                                  vertical: 8.0,
-                                  horizontal: 4.0,
-                                ),
+                        items: sliderImgList.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
                                 decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color:
-                                  (Theme.of(context).brightness ==
-                                      Brightness.dark
-                                      ? Colors.white
-                                      : Color(0xFFF99B2B))
-                                      .withOpacity(
-                                    _current == entry.key ? 0.9 : 0.4,
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                      "${GetBaseUrl.imgBaseUrl}/${i['image']}",
+                                    ),
                                   ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0xffE4E4E7),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                              );
+                            },
+                          );
+                        }).toList(),
                       ),
+
+                      // Positioned(
+                      //   bottom: 4,
+                      //   left: 120,
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: sliderImgList.asMap().entries.map((entry) {
+                      //       return GestureDetector(
+                      //         onTap: () => _controller.animateToPage(entry.key),
+                      //         child: Container(
+                      //           width: 8.0,
+                      //           height: 8.0,
+                      //           margin: EdgeInsets.symmetric(
+                      //             vertical: 8.0,
+                      //             horizontal: 4.0,
+                      //           ),
+                      //           decoration: BoxDecoration(
+                      //             shape: BoxShape.circle,
+                      //             color:
+                      //                 (Theme.of(context).brightness ==
+                      //                             Brightness.dark
+                      //                         ? Colors.white
+                      //                         : Color(0xFFF99B2B))
+                      //                     .withOpacity(
+                      //                       _current == entry.key ? 0.9 : 0.4,
+                      //                     ),
+                      //           ),
+                      //         ),
+                      //       );
+                      //     }).toList(),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],
@@ -212,41 +292,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: 5,
+                      itemCount: categoriesList.length,
                       itemBuilder: (context, index) {
-                        print("choice color index : ${index}");
-                        return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            // color: Colors.green,
-                            image: DecorationImage(
-                              image: AssetImage("assets/product_details.png"),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          height: 100,
-                          width: 105,
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 75, bottom: 50),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xFF2E2827),
-                              ),
-                              height: 25,
-                              width: 105,
-                              child: Center(
-                                child: Text(
-                                  "Women's",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                        // print("choice color index : ${index}");
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductsScreen(whichPage: categoriesList[index]['name'], catId: categoriesList[index]['id'],),));
+                          },
+                          child: CategoriesCard(categories: categoriesList[index],),
                         );
                       },
                     ),
@@ -254,307 +307,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: 20),
-              // Best Selling
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 5,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Best Selling",
-                        style: TextStyle(
-                          color: Color(0xFF5B5B5B),
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        "See all",
-                        style: TextStyle(
-                          color: Color(0xFFF99B2B),
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
 
-                  SizedBox(
-                    height: 290,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        //single card
-                        return Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 5,
-                            vertical: 10,
-                          ),
 
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0xFFD4D4D4),
-                                spreadRadius: 1,
-                                blurRadius: 2,
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          height: 300,
-                          width: 170,
-                          child: Column(
-                            spacing: 10,
-                            children: [
-                              Image(
-                                image: AssetImage("assets/redBorkhaImage.png"),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 5,
-                                ),
-                                child: Column(
-                                  spacing: 12,
-                                  children: [
-                                    //product name & price
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 5),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          //Name
-                                          Text(
-                                            "Party Borkha Abaya Koliza",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                          // price
-                                          Row(
-                                            spacing: 7,
-                                            children: [
-                                              Text(
-                                                "2880",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 13,
-                                                ),
-                                              ),
-                                              Text(
-                                                "3200",
-                                                style: TextStyle(
-                                                  color: Color(0xFFB3B3B3),
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12,
-                                                  decoration: TextDecoration
-                                                      .lineThrough,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+              // showcase trading products
+              // Hot Selling
+              ProductShowCase( productList: homeProductsList['hot-selling'], cardName: 'Hot Selling', cardKeyName: 'hot-selling', reloadData: fetchData,),
 
-                                    // Add To Cart Button
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color(0xFFE5E5E5),
-                                            spreadRadius: 1,
-                                            blurRadius: 1,
-                                          ),
-                                        ],
-                                      ),
-                                      width: 110,
-                                      height: 35,
-                                      child: Center(
-                                        child: Text(
-                                          "Add To Cart",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(height: 20),
-              // New Arrival
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 5,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "New Arrival",
-                        style: TextStyle(
-                          color: Color(0xFF5B5B5B),
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        "See all",
-                        style: TextStyle(
-                          color: Color(0xFFF99B2B),
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
+              // Top Selling
+              ProductShowCase( productList: homeProductsList['top-selling'], cardName: 'Top Selling',cardKeyName: 'top-selling',reloadData: fetchData,),
 
-                  SizedBox(
-                    height: 290,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        //single card
-                        return Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 5,
-                            vertical: 10,
-                          ),
+              SizedBox(height: 20),
+              // New Product
+              ProductShowCase( productList: homeProductsList['new-product'], cardName: 'New Product',cardKeyName: 'new-product',reloadData: fetchData,),
 
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0xFFD4D4D4),
-                                spreadRadius: 1,
-                                blurRadius: 2,
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          height: 300,
-                          width: 170,
-                          child: Column(
-                            spacing: 10,
-                            children: [
-                              Image(
-                                image: AssetImage(
-                                  "assets/yellowBorkhaImage.png",
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 5,
-                                ),
-                                child: Column(
-                                  spacing: 12,
-                                  children: [
-                                    //product name & price
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 5),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          //Name
-                                          Text(
-                                            "Party Borkha Abaya Koliza",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                          // price
-                                          Row(
-                                            spacing: 7,
-                                            children: [
-                                              Text(
-                                                "2880",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 13,
-                                                ),
-                                              ),
-                                              Text(
-                                                "3200",
-                                                style: TextStyle(
-                                                  color: Color(0xFFB3B3B3),
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12,
-                                                  decoration: TextDecoration
-                                                      .lineThrough,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                    // Add To Cart Button
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color(0xFFE5E5E5),
-                                            spreadRadius: 1,
-                                            blurRadius: 1,
-                                          ),
-                                        ],
-                                      ),
-                                      width: 110,
-                                      height: 35,
-                                      child: Center(
-                                        child: Text(
-                                          "Add To Cart",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(height: 20),
 
               //Party Abaya banner & cards
@@ -669,7 +435,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               //Name
                                               Text(
@@ -691,7 +457,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                      FontWeight.w500,
+                                                          FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -700,7 +466,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xFFB3B3B3),
                                                       fontWeight:
-                                                      FontWeight.w400,
+                                                          FontWeight.w400,
                                                       fontSize: 13,
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -785,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               //Name
                                               Text(
@@ -807,7 +573,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                      FontWeight.w500,
+                                                          FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -816,7 +582,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xFFB3B3B3),
                                                       fontWeight:
-                                                      FontWeight.w400,
+                                                          FontWeight.w400,
                                                       fontSize: 13,
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -871,7 +637,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 20),
 
-              //Ambroidery Abaya banner & cards
+              //Embroidery Abaya banner & cards
               Container(
                 decoration: BoxDecoration(
                   color: Color(0xFFFCE9D8),
@@ -983,7 +749,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               //Name
                                               Text(
@@ -1005,7 +771,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                      FontWeight.w500,
+                                                          FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -1014,7 +780,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xFFB3B3B3),
                                                       fontWeight:
-                                                      FontWeight.w400,
+                                                          FontWeight.w400,
                                                       fontSize: 13,
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -1099,7 +865,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               //Name
                                               Text(
@@ -1121,7 +887,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                      FontWeight.w500,
+                                                          FontWeight.w500,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -1130,7 +896,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     style: TextStyle(
                                                       color: Color(0xFFB3B3B3),
                                                       fontWeight:
-                                                      FontWeight.w400,
+                                                          FontWeight.w400,
                                                       fontSize: 13,
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -1192,3 +958,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
+
+
