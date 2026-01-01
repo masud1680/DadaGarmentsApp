@@ -1,10 +1,12 @@
 import 'package:dadaborkahouse/controller/base_url.dart';
+import 'package:dadaborkahouse/controller/cart.dart';
 import 'package:flutter/material.dart';
 
 class SingleProductCart extends StatelessWidget {
-  const SingleProductCart({super.key, required this.product});
+  const SingleProductCart({super.key, required this.product, required this.fetchData});
 
   final Map product;
+  final VoidCallback fetchData;
 
   @override
   Widget build(BuildContext context) {
@@ -108,10 +110,17 @@ class SingleProductCart extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Color(0xFFF4A758),
-                      radius: 12,
-                      child: Icon(Icons.add, color: Colors.black),
+                    InkWell(
+                      onTap: () async{
+                        int plusQuantity = product['quantity'] + 1;
+                        CartController().addToCat(productId:  product['product_id'], quantity: plusQuantity);
+                        fetchData();
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Color(0xFFF4A758),
+                        radius: 12,
+                        child: Icon(Icons.add, color: Colors.black),
+                      ),
                     ),
                     Text(
                       "${product['quantity']}",
@@ -121,10 +130,17 @@ class SingleProductCart extends StatelessWidget {
                         fontSize: 10,
                       ),
                     ),
-                    CircleAvatar(
-                      backgroundColor: Color(0xFFF4A758),
-                      radius: 12,
-                      child: Icon(Icons.remove, color: Colors.black),
+                    InkWell(
+                      onTap: () async{
+                        int minusQuantity = product['quantity'] - 1;
+                        CartController().addToCat(productId:  product['product_id'], quantity: minusQuantity);
+                        fetchData();
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Color(0xFFF4A758),
+                        radius: 12,
+                        child: Icon(Icons.remove, color: Colors.black),
+                      ),
                     ),
                   ],
                 ),

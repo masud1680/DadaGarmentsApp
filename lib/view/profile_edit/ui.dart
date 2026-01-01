@@ -1,3 +1,4 @@
+import 'package:dadaborkahouse/view/widgets/long_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
@@ -351,31 +352,7 @@ class _EditProfileState extends State<EditProfile> {
                 onTap: () {
                   print("Save Changes clicked...");
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF4A758),
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xFFD4D4D4),
-                        blurRadius: 1,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                  ),
-                  width: double.infinity,
-                  height: 50,
-                  child: Center(
-                    child: Text(
-                      "Save Changes",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
+                child: LongButton(btnName: "Save Changes"),
               ),
               SizedBox(height: 40),
 
