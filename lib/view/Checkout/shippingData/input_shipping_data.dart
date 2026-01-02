@@ -8,8 +8,8 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../widgets/long_button.dart';
 
 class InputShippingData extends StatefulWidget {
-  const InputShippingData({super.key});
-
+  const InputShippingData({super.key, required this.whichBtn});
+  final String whichBtn;
   @override
   State<InputShippingData> createState() => _InputShippingDataState();
 }
@@ -20,7 +20,6 @@ class _InputShippingDataState extends State<InputShippingData> {
   TextEditingController userPhone = TextEditingController();
 
   TextEditingController userAddress = TextEditingController();
-
 
   bool isLoading = false;
   Map userShippingInformation = {};
@@ -34,22 +33,22 @@ class _InputShippingDataState extends State<InputShippingData> {
     if (sui != null) {
       userShippingInformation = jsonDecode(sui);
       log('=============$userShippingInformation==========');
-        userName.text = userShippingInformation['customer_name'];
-       userPhone.text = userShippingInformation['customer_phone'];
-        userAddress.text = userShippingInformation['address'];
+      userName.text = userShippingInformation['customer_name'];
+      userPhone.text = userShippingInformation['customer_phone'];
+      userAddress.text = userShippingInformation['address'];
     }
     isLoading = false;
     // setState(() {});
   }
 
-
   @override
   void initState() {
     // TODO: implement initState
-    fetchData();
+    if (widget.whichBtn == 'change') {
+      fetchData();
+    }
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -241,7 +240,6 @@ class _InputShippingDataState extends State<InputShippingData> {
                   );
                   Navigator.pop(context);
                 },
-
 
                 child: LongButton(btnName: "Save Changes"),
               ),

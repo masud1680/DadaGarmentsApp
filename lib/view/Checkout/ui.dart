@@ -124,7 +124,7 @@ return orderSummery;
                         //single cards
                         return SingleProductCart(
                           product: cartData[index],
-                          fetchData: fetchData,
+                          fetchData: fetchData, countUpdateBtnShow: false,
                         );
                       },
                     ),

@@ -86,7 +86,7 @@ final Map orderSummary;
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Delivery Location",
+                "Delivery Area",
                 style: TextStyle(
                   color: Color(0xFF9F9FA9),
                   fontWeight: FontWeight.w400,

@@ -94,7 +94,7 @@ class _CartScreenState extends State<CartScreen> {
                       itemCount: cartData.length,
                       itemBuilder: (context, index) {
                         //single cards
-                        return SingleProductCart(product: cartData[index], fetchData:   fetchData,);
+                        return SingleProductCart(product: cartData[index], fetchData:   fetchData, countUpdateBtnShow: true,);
                       },
                     ),
 

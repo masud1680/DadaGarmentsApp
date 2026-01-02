@@ -1,11 +1,15 @@
 import 'dart:developer';
 
 import 'package:dadaborkahouse/controller/base_url.dart';
+import 'package:dadaborkahouse/controller/cart.dart';
 import 'package:dadaborkahouse/controller/product.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:readmore/readmore.dart';
 
+import '../auth/login/ui.dart';
 import '../cart/ui.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -158,7 +162,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                             width: 223,
                             height: 293,
 
-                            child: FadeInImage.assetNetwork(placeholder: 'assets/loading_img/noImage.jpg' , image: '${GetBaseUrl.imgBaseUrl}/${productData['image']}',fit: BoxFit.fill,),
+                            child: FadeInImage.assetNetwork(
+                              placeholder: 'assets/loading_img/noImage.jpg',
+                              image:
+                                  '${GetBaseUrl.imgBaseUrl}/${productData['image']}',
+                              fit: BoxFit.fill,
+                            ),
                           ),
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 5),
@@ -174,12 +183,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   margin: EdgeInsets.symmetric(horizontal: 2),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    // color: Colors.green,
 
+                                    // color: Colors.green,
                                   ),
                                   height: 70,
                                   width: 70,
-                                  child: FadeInImage.assetNetwork(placeholder: 'assets/loading_img/loading_circle.gif' , image: '${GetBaseUrl.imgBaseUrl}/${productData['gallery'][index]}',fit: BoxFit.fill,),
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder:
+                                        'assets/loading_img/noImage.jpg',
+                                    image:
+                                        '${GetBaseUrl.imgBaseUrl}/${productData['gallery'][index]}',
+                                    fit: BoxFit.fill,
+                                  ),
                                 );
                               },
                             ),
@@ -203,7 +218,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
-
                                 ),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
@@ -629,8 +643,30 @@ class _ProductDetailsState extends State<ProductDetails> {
                         children: [
                           Flexible(
                             child: InkWell(
-                              onTap: () {
-                                print("Add To Cart clicked...");
+                              onTap: () async {
+                                // print("Add To Cart clicked...");
+                                int statusCode = await CartController()
+                                    .addToCat(
+                                      productId: productData['id'],
+                                      quantity: 1,
+                                    );
+                                if (statusCode == 200) {
+                                  fetchData();
+                                  EasyLoading.showSuccess(
+                                    "Product Add Successful",
+                                  );
+                                } else if (statusCode == 401) {
+                                  EasyLoading.showError('Unauthorized');
+                                  final storage = FlutterSecureStorage();
+                                  storage.deleteAll();
+
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SignInScreen(),
+                                    ),
+                                  );
+                                }
                               },
                               child: Container(
                                 decoration: BoxDecoration(
