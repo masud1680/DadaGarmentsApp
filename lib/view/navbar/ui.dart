@@ -1,6 +1,7 @@
 import 'dart:math';
 
 
+import 'package:dadaborkahouse/view/order/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
@@ -23,7 +24,7 @@ class _NavSwitchScreenState extends State<NavSwitchScreen> {
   // State variable to hold the selected index
   int pageIndex = 0;
 
-  List screen = [HomeScreen(),CategoriesScreen(),ProductsScreen(whichPage: 'Discount',), CartScreen(), ProductDetails(productId: 1,)];
+  List screen = [HomeScreen(),CategoriesScreen(),ProductsScreen(whichPage: 'Discount',), CartScreen(), ViewOrders()];
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +91,7 @@ class _NavSwitchScreenState extends State<NavSwitchScreen> {
           ),
           CurvedNavigationBarItem(
             child: Image(image: AssetImage("assets/whitelist_icon.png")),
-            label: 'Wishlist',
+            label: 'Orders',
             labelStyle: pageIndex == 4 ? TextStyle(
                 color: Color(0xFF2E2827),
                 fontSize: 14,

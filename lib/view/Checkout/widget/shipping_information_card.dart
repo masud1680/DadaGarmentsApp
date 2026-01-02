@@ -5,7 +5,7 @@ import 'package:dadaborkahouse/view/Checkout/shippingData/input_shipping_data.da
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'input_shipping_information.dart';
+import '../shippingData/select_payment_method.dart';
 
 class ShippingInformationCard extends StatefulWidget {
   const ShippingInformationCard({super.key});
@@ -25,12 +25,11 @@ class _ShippingInformationCardState extends State<ShippingInformationCard> {
     setState(() {});
 
     FlutterSecureStorage storage = FlutterSecureStorage();
-    var sui = await storage.read(key: 'shippingUserInformation');
-    if (sui != null) {
-      userShippingInformation = jsonDecode(sui);
+    var usi = await storage.read(key: 'shippingUserInformation');
 
-      // log('=============$userShippingInformation==========');
-    }
+      userShippingInformation = jsonDecode(usi!);
+
+
     isLoading = false;
     setState(() {});
   }
@@ -51,7 +50,7 @@ class _ShippingInformationCardState extends State<ShippingInformationCard> {
       ),
 
       width: MediaQuery.sizeOf(context).width,
-      height: 200,
+      // height: 200,
   // car title & button
       child: Column(
         spacing: 5,
@@ -71,14 +70,14 @@ class _ShippingInformationCardState extends State<ShippingInformationCard> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-
+                userShippingInformation['address'] != null
+                ?
                 //add button name
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: InkWell(
                     onTap: () {
-                      // call bottom sheet bar
-                      // inputShippingInformationBottomSheetBar(context, userName , userPhone, userPhone);
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -96,7 +95,8 @@ class _ShippingInformationCardState extends State<ShippingInformationCard> {
                       ),
                     ),
                   ),
-                ),
+                )
+                : SizedBox(),
               ],
             ),
           ),
@@ -182,7 +182,7 @@ class _ShippingInformationCardState extends State<ShippingInformationCard> {
                     child: Column(
                       children: [
                         //user name & change button
-                        Expanded(
+                        Flexible(
                           flex: 2,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -227,7 +227,7 @@ class _ShippingInformationCardState extends State<ShippingInformationCard> {
                           ),
                         ),
                         // user contact
-                        Expanded(
+                        Flexible(
                           flex: 2,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -244,7 +244,7 @@ class _ShippingInformationCardState extends State<ShippingInformationCard> {
                           ),
                         ),
                         // user shipping address
-                        Expanded(
+                        Flexible(
                           flex: 5,
                           child: Text(
                             '${userShippingInformation['address']}',

@@ -15,7 +15,7 @@ class SingleProductCart extends StatelessWidget {
   });
   final bool countUpdateBtnShow;
   final Map product;
-  final VoidCallback fetchData;
+  final VoidCallback? fetchData;
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +161,7 @@ class SingleProductCart extends StatelessWidget {
                                 quantity: plusQuantity,
                               );
                               if (statusCode == 200) {
-                                fetchData();
+                                fetchData!();
                                 // EasyLoading.showSuccess("Product Add Successful");
                               } else if (statusCode == 401) {
                                 EasyLoading.showError('Unauthorized');
@@ -200,7 +200,7 @@ class SingleProductCart extends StatelessWidget {
                               );
 
                               if (statusCode == 200) {
-                                fetchData();
+                                fetchData!();
                                 // EasyLoading.showSuccess("Product Add Successful");
                               } else if (statusCode == 401) {
                                 EasyLoading.showError('Unauthorized');

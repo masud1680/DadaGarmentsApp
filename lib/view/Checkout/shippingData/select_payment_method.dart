@@ -8,7 +8,7 @@
 //
 // import '../../widgets/long_button.dart';
 //
-// void inputShippingInformationBottomSheetBar(BuildContext context, TextEditingController userName, TextEditingController userPhone, TextEditingController userAddress) {
+// void inputShippingInformationBottomSheetBar(BuildContext context, ) {
 //   showModalBottomSheet(
 //
 //     context: context,
@@ -49,7 +49,7 @@
 //                         ),
 //                       ),
 //                       TextField(
-//                         controller: userName,
+//                         // controller: userName,
 //                         keyboardType: TextInputType.text,
 //                         decoration: InputDecoration(
 //                           hintText: "Your name",
@@ -101,7 +101,7 @@
 //                         ),
 //                       ),
 //                       IntlPhoneField(
-//                         controller: userPhone,
+//                         // controller: userPhone,
 //                         decoration: InputDecoration(
 //                           enabledBorder:
 //                           OutlineInputBorder(
@@ -288,7 +288,7 @@
 //                         ),
 //                       ),
 //                       TextFormField(
-//                         controller: userAddress,
+//                         // controller: userAddress,
 //                         minLines: 3,
 //                         maxLines: 3,
 //                         keyboardType:
@@ -331,19 +331,19 @@
 //                   SizedBox(height: 10),
 //                   // save changes buttons
 //                   InkWell(
-//                     onTap: () {
-//                       // print("Save Changes clicked...");
-//                       var shippingUserInformation = {
-//                         'customer_name' : userName,
-//                         'customer_phone' : userPhone,
-//                         'address' : userAddress
-//
-//                       };
-//                       log("======$shippingUserInformation=============");
-//                       FlutterSecureStorage storage = FlutterSecureStorage();
-//                       storage.write(key: 'shippingUserInformation', value: jsonEncode(shippingUserInformation));
-//                       Navigator.pop(context);
-//                     },
+//                     // onTap: () {
+//                     //   // print("Save Changes clicked...");
+//                     //   var shippingUserInformation = {
+//                     //     'customer_name' : userName,
+//                     //     'customer_phone' : userPhone,
+//                     //     'address' : userAddress
+//                     //
+//                     //   };
+//                     //   log("======$shippingUserInformation=============");
+//                     //   FlutterSecureStorage storage = FlutterSecureStorage();
+//                     //   storage.write(key: 'shippingUserInformation', value: jsonEncode(shippingUserInformation));
+//                     //   Navigator.pop(context);
+//                     // },
 //                     child: LongButton(
 //                       btnName: "Save Changes",
 //                     ),

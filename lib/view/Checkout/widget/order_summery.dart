@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 
 class OrderSummary extends StatelessWidget {
-  const OrderSummary({
-    super.key, required this.orderSummary,
-  });
-final Map orderSummary;
+  const OrderSummary({super.key, required this.orderSummary});
+
+  final Map orderSummary;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 10,
-      ),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       decoration: BoxDecoration(
         color: Color(0xFFF6F6F6),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
-          BoxShadow(
-            color: Color(0xFFE5E5E5),
-            spreadRadius: 1,
-            blurRadius: 1,
-          ),
+          BoxShadow(color: Color(0xFFE5E5E5), spreadRadius: 1, blurRadius: 1),
         ],
       ),
       width: double.infinity,

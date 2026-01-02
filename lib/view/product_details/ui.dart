@@ -3,8 +3,9 @@ import 'dart:developer';
 import 'package:dadaborkahouse/controller/base_url.dart';
 import 'package:dadaborkahouse/controller/cart.dart';
 import 'package:dadaborkahouse/controller/product.dart';
+import 'package:dadaborkahouse/view/Checkout/ui.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:readmore/readmore.dart';
@@ -15,11 +16,14 @@ import '../cart/ui.dart';
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.productId});
   final int productId;
+
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  int quantity = 1;
+  int totalPrice = 0;
   bool isLoading = true;
   Map productData = {};
 
@@ -31,8 +35,29 @@ class _ProductDetailsState extends State<ProductDetails> {
       productId: widget.productId,
     );
     // log('========$productData====');
+
+totalPrice = int.parse(productData['price']);
+
     isLoading = false;
     setState(() {});
+  }
+
+  void updateQuantity(String value) {
+    if (value == "plus") {
+      quantity += 1;
+    } else if (value == "minus" && quantity > 1) {
+      quantity -= 1;
+    }
+
+    totalPrice = int.parse(productData['price']) * quantity;
+
+
+
+
+
+    setState(() {
+
+    });
   }
 
   @override
@@ -234,13 +259,81 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                           ],
                         ),
-                        Text(
-                          "${productData['brand']}",
-                          style: TextStyle(
-                            color: Color(0xFF757575),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            //brad name
+                            Text(
+                              "${productData['brand']}",
+                              style: TextStyle(
+                                color: Color(0xFF757575),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                              ),
+                            ),
+
+                            // items count increment & decrement button
+                            Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 5,
+                                vertical: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFBE9D7),
+
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              width: 70,
+                              height: 25,
+
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+
+                                    onTap: () {
+                                      updateQuantity("plus");
+                                      setState(() {});
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Color(0xFFF4A758),
+                                      radius: 12,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    "$quantity",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    onTap: () {
+                                      updateQuantity("minus");
+                                      setState(() {});
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Color(0xFFF4A758),
+                                      radius: 12,
+                                      child: Icon(
+                                        Icons.remove,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                         // price
                         Row(
@@ -698,7 +791,26 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Flexible(
                             child: InkWell(
                               onTap: () {
-                                print("Buy Now clicked...");
+
+
+                                List cartData = [];
+                                Map forCardData = {
+                                  'quantity' : quantity,
+                                  'total' : totalPrice,
+                                  'product_id' : productData['id']
+                                };
+
+                                forCardData.addEntries(productData.entries);
+                                cartData.add(forCardData);
+
+                                log("Buy Now clicked...$cartData");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CheckoutScreen(cartData: cartData),
+                                  ),
+                                );
                               },
                               child: Container(
                                 decoration: BoxDecoration(

@@ -16,10 +16,13 @@ class InputShippingData extends StatefulWidget {
 
 class _InputShippingDataState extends State<InputShippingData> {
   TextEditingController userName = TextEditingController();
-
+String userCompletePhoneNumber  = "";
   TextEditingController userPhone = TextEditingController();
 
   TextEditingController userAddress = TextEditingController();
+  TextEditingController userDistrict = TextEditingController();
+  TextEditingController userUpazila = TextEditingController();
+  TextEditingController userStreet = TextEditingController();
 
   bool isLoading = false;
   Map userShippingInformation = {};
@@ -32,9 +35,15 @@ class _InputShippingDataState extends State<InputShippingData> {
     var sui = await storage.read(key: 'shippingUserInformation');
     if (sui != null) {
       userShippingInformation = jsonDecode(sui);
-      log('=============$userShippingInformation==========');
+      // log('=============$userShippingInformation==========');
       userName.text = userShippingInformation['customer_name'];
       userPhone.text = userShippingInformation['customer_phone'];
+
+      userDistrict.text = userShippingInformation['district'];
+
+      userUpazila.text = userShippingInformation['upazila'];
+
+      userStreet.text = userShippingInformation['street'];
       userAddress.text = userShippingInformation['address'];
     }
     isLoading = false;
@@ -92,7 +101,7 @@ class _InputShippingDataState extends State<InputShippingData> {
               SizedBox(height: 20),
               //Simple Title
               Text(
-                "Profile Information",
+                "Shipping Information",
                 style: TextStyle(
                   color: Color(0XFF5B5B5B),
                   fontSize: 18,
@@ -155,7 +164,7 @@ class _InputShippingDataState extends State<InputShippingData> {
                         ),
                       ),
                       IntlPhoneField(
-                        controller: userPhone,
+controller: userPhone,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -175,12 +184,124 @@ class _InputShippingDataState extends State<InputShippingData> {
                         ),
                         initialCountryCode: 'BD',
                         onChanged: (phone) {
-                          print(phone.completeNumber);
+                          log("==============${phone.completeNumber}==========");
+                           userCompletePhoneNumber = phone.completeNumber ;
+
                         },
                       ),
                     ],
                   ),
-
+                  // district
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 6,
+                    children: [
+                      Text(
+                        "District",
+                        style: TextStyle(
+                          color: Color(0XFF5B5B5B),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      TextField(
+                        controller: userDistrict,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText: "Your district",
+                          hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Color(0xFFCCCCCC),
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Color(0xFFCCCCCC),
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // upazila
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 6,
+                    children: [
+                      Text(
+                        "Upazila",
+                        style: TextStyle(
+                          color: Color(0XFF5B5B5B),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      TextField(
+                        controller: userUpazila,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText: "Your upazila",
+                          hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Color(0xFFCCCCCC),
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Color(0xFFCCCCCC),
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // street
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 6,
+                    children: [
+                      Text(
+                        "Street",
+                        style: TextStyle(
+                          color: Color(0XFF5B5B5B),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      TextField(
+                        controller: userStreet,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          hintText: "Your street",
+                          hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Color(0xFFCCCCCC),
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(
+                              color: Color(0xFFCCCCCC),
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   // Address
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,7 +321,7 @@ class _InputShippingDataState extends State<InputShippingData> {
                         maxLines: 3,
                         keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
-                          hintText: "Uttara",
+                          hintText: "Detail address",
                           hintStyle: TextStyle(color: Color(0xFFD4D4D4)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -229,10 +350,14 @@ class _InputShippingDataState extends State<InputShippingData> {
                   print("Save Changes clicked...");
                   var shippingUserInformation = {
                     'customer_name': userName.text,
-                    'customer_phone': userPhone.text,
+                    // 'customer_phone': userPhone.text,
+                    'customer_phone': userCompletePhoneNumber,
+                    'district' : userDistrict.text,
+                    'upazila' : userUpazila.text,
+                    'street' : userStreet.text,
                     'address': userAddress.text,
                   };
-                  // log("======$shippingUserInformation=============");
+                  log("======$shippingUserInformation=============");
                   FlutterSecureStorage storage = FlutterSecureStorage();
                   storage.write(
                     key: 'shippingUserInformation',

@@ -18,14 +18,20 @@ class _CartScreenState extends State<CartScreen> {
   bool isLoading = false;
   List cartData = [];
 
+
+
   void fetchData() async {
     isLoading = true;
     setState(() {});
     cartData = await CartController().fetchCartProducts();
-    log("====$cartData");
+
     isLoading = false;
+
+
     setState(() {});
   }
+
+
 
   @override
   void initState() {
@@ -34,6 +40,7 @@ class _CartScreenState extends State<CartScreen> {
 
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +110,11 @@ class _CartScreenState extends State<CartScreen> {
                     InkWell(
                       onTap: () {
                         // print("Bye Now clicked...");
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutScreen(),)).then((value) => fetchData(),);
+                        if(cartData.isNotEmpty){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutScreen(cartData: cartData, ),)).then((value) => fetchData(),);
+                        }
                       },
-                      child: LongButton(btnName: 'Bye Now',),
+                      child: LongButton(btnName: 'Checkout',),
                     ),
                     SizedBox(height: 20),
                   ],
